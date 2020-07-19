@@ -1,0 +1,32 @@
+{% extends "dshop/base_dshop.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ product.name }}</h1>
+                <img src="{{ product.image.url }}" width="300">
+                <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+                <p> Цена: {{ product.price }} руб.</p>
+                {% autoescape off %}{{ product.description|linebreaks }}{% endautoescape %}
+                <form action="{% url "cart:cart_add" product.id %}" method="post">
+                    <div class="col-1">
+                        {{ cart_product_form.quantity|as_crispy_field }}
+                        <input type="submit" class="btn btn-primary" value="Добавить в корзину">
+                        {% csrf_token %}
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "dshop/base_dshop.html" %}
+{% load static %}
+
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Регистрация и вход</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Отправить</button>
+                </form>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+{% endblock content %}

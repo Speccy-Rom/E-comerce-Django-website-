@@ -1,0 +1,65 @@
+{% extends "dshop/base_dshop.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+    Оформление заказа
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <h4 class="display-4">Оформление заказа:</h4>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Количество</th>
+                <th scope="col">Товар</th>
+                <th scope="col">Цена</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in cart %}
+                <tr>
+                    <td>{{ item.quantity }} шт.</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.total_price }} руб.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <h6> Итого: {{ cart.get_total_price }} руб.</h6>
+
+        <div class="alert alert-dark" role="alert">
+            Ваши контактые данные:
+        </div>
+
+        <form action="." method="post" class="order-form">
+            <div class="row">
+                <div class="col-6">
+                    {{ form.first_name|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                    {{ form.last_name|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                    {{ form.email|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                    {{ form.address|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                    {{ form.phone|as_crispy_field }}
+                </div>
+                <div class="col-6">
+                    {{ form.city|as_crispy_field }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Подтвердить заказ</button>
+            {% csrf_token %}
+        </form>
+    </div> <!-- /container -->
+{% endblock %}

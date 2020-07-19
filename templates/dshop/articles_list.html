@@ -1,0 +1,36 @@
+{% extends "dshop/base_dshop.html" %}
+{% load static %}
+
+{% block title %}
+        Статьи и обзоры магазина Speccy-Rom
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="jumbotron">
+            <div class="container">
+                <h4 class="display-4">Обзоры новинок нашего магазина</h4>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2">
+            {% for article in articles %}
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="{{ article.image.url }}" class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><a
+                                        href="{{ article.get_absolute_url }}">{{ article.title }}</a><br></h5>
+                                <p class="card-text">{% autoescape off %}{{ article.text|truncatewords:20 }}{% endautoescape %}</p>
+                                <p class="card-text"><small class="text-muted">{{ article.published_at }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div><!-- /container -->
+{% endblock content %}

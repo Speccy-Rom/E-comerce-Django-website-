@@ -1,0 +1,62 @@
+{% extends "dshop/base_dshop.html" %}
+{% load static %}
+
+{% block title %}
+    Интернет магазин Speccy-Rom
+{% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Добро пожаловать в магазин Speccy-Rom</h1>
+            <p>Лучшие товары только у нас:</p>
+        </div>
+    </div>
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Nexus 5x</h2>
+                <a href="./dshop/product/lg-nexus-5x-h791-16gb">
+                    <img src="{% static 'nexus5x.webp' %}" width="180">
+                </a>
+            </div>
+            <div class="col-md-4">
+                <h2>iPhone Xr</h2>
+                <a href="./dshop/product/apple-iphone-xr-128gb/">
+                    <img src="{% static 'IPhoneXr.jpg' %}" width="180">
+                </a>
+            </div>
+            <div class="col-md-4">
+                <h2>Samsung Galaxy Watch</h2>
+                <a href="./dshop/product/samsung-galaxy-watch-46-mm-serebristaya-stal/">
+                    <img src="{% static 'GalaxyWatch.jpg' %}" width="180">
+                </a>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Не знаете что выбрать?</h1>
+            <p>Статьи, которые Вам помогут:</p>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-md-4">
+                    <a href="{{ article.get_absolute_url }}">
+                        <img src="{% if article.image %}{{ article.image.url }}
+                                  {% else %}{% static "img/no_image.png" %}{% endif %}" width="250"></a>
+                    <h5 class="card-title"><a
+                            href="{{ article.get_absolute_url }}">{{ article.title }}</a><br></h5>
+                    <p class="card-text">{% autoescape off %}{{ article.text|truncatewords:20 }}{% endautoescape %}</p>
+                    <p class="card-text"><small class="text-muted">{{ article.published_at }}</small></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div> <!-- /container -->
+
+{% endblock content %}

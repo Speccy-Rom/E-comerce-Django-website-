@@ -1,0 +1,28 @@
+{% extends  "dshop/base_dshop.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h4 class="display-4">Вход пользователя</h4>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Введите email или </h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+
+                    {{ form|crispy }}
+
+                    <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

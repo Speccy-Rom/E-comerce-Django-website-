@@ -1,0 +1,38 @@
+{% extends "dshop/base_dshop.html" %}
+{% load static %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="jumbotron">
+            <div class="container">
+                <h4 class="display-4">{% if category %}{{ category.name }}{% else %}Products{% endif %}</h4>
+            </div>
+        </div>
+        <div class="container mb-5">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4">
+                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                        <a href="{{ product.get_absolute_url }}">
+                            <img src="{{ product.image.url }}" height="250"></a>
+                        <p> Цена: {{ product.price }} руб.</p>
+{#                        <form>#}
+{#                            <input type="submit" class="btn btn-secondary" value="Подробнее">#}
+{##}
+{#                        </form>#}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="alert alert-dark" role="alert">
+            Выбираейте с удовольствием!
+        </div>
+    </div> <!-- /container -->
+
+{% endblock content %}

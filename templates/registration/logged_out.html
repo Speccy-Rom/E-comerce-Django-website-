@@ -1,0 +1,21 @@
+{% extends  "dshop/base_dshop.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h4 class="display-4">Вы не авторизованы</h4>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Войдите снова!</h4>
+                <a  href="{% url 'accounts:login' %}">Войти еще раз</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

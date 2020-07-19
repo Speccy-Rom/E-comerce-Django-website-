@@ -1,0 +1,59 @@
+{% extends "dshop/base_dshop.html" %}
+{% load static %}
+{% block title %}
+    Ваша корзина:
+{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <h4 class="display-4">Корзина покупок:</h4>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Изображение</th>
+                <th scope="col">Товар</th>
+                <th scope="col">Количество</th>
+                <th scope="col">Удалить</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Стоимость</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in cart %}
+                {% with product=item.product %}
+                    <tr>
+                        <td>
+                            <a href="{{ product.get_absolute_url }}">
+                                <img src="{{ product.image.url }}" height="100">
+                            </a>
+                        </td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td><a href="{% url "cart:cart_remove" product.id %}">Удалить из корзины</a></td>
+                        <td class="num">{{ item.price }} руб.</td>
+                        <td class="num">{{ item.total_price }} руб.</td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+            <tr class="total">
+                <td><h6></h6></td>
+                <td colspan="4"><h6>Стоимость заказа</h6></td>
+                <td class="num"><h6>{{ cart.get_total_price }} руб.</h6></td>
+            </tr>
+            </tbody>
+        </table>
+        <p class="text-center" >
+            <a href="{% url "dshop:product_list" %}"
+            <button type="button" class="btn btn-secondary btn-lg">Продолжить покупки</button>
+            </a>
+            {% if cart.get_total_price != 0 %}
+                <a href="{% url "orders:order_create" %}"
+                <button type="button" class="btn btn-primary btn-lg">Перейти к оформлению</button>
+                </a>
+            {% endif %}
+        </p>
+    </div> <!-- /container -->
+{% endblock %}

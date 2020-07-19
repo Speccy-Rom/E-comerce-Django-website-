@@ -1,0 +1,29 @@
+{% extends "dshop/base_dshop.html" %}
+
+{% block title %}Спасибо, заказ оформлен!{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Завершение обработки заказа.
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Ваш заказ успешно оформлен!</h5>
+                        <p class="card-text">Номер Вашего заказа <strong>{{ order.id }}</strong>.</p>
+                        <a href="{% url "dshop:product_list" %}" class="btn btn-primary">Смотреть еще товары</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Спасибо за покупку в нашем магазине! Ждем Вас снова!
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </div> <!-- /container -->
+{% endblock %}
