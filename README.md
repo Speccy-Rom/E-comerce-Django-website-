@@ -47,5 +47,5 @@ python manage.py migrate
 * Дамп данных с тестовым наполнением:
 ```bash
 fixtures.json
-```
+
 
