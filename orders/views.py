@@ -6,8 +6,8 @@ from cart.cart import Cart
 
 def order_create(request):
     cart = Cart(request)
+    user = request.user
     if request.method == 'POST':
-        user = request.user
         if user.is_authenticated:
             data = {"last_name": user.last_name, "first_name": user.first_name, "email": user.email}
             form = OrderCreateForm(request.POST, initial=data)
@@ -26,7 +26,6 @@ def order_create(request):
             cart.clear()
             return render(request, 'orders/created.html', {'order': order})
     else:
-        user = request.user
         data = {}
         if user.is_authenticated:
             data["last_name"] = user.last_name
